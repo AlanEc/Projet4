@@ -1,0 +1,79 @@
+{% extends "LouvreResaBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+  
+<h1></h1>
+<div id="conatainerAccueil">
+  <div class="row">
+
+  		<div class="col-lg-offset-2 col-lg-3">
+  			<h3>Billetterie</h3>
+  			<div class="well">
+  	{{ form_start(form) }}
+  	{# Les erreurs générales du formulaire. #}
+  	{{ form_errors(form) }}
+  	{{ form_row(form.typeBillet) }}
+  	{{ form_row(form.jourVisite) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.jourVisite) }}
+  	{{ form_row(form.billets) }}
+  	 <a href="#" id="add_billet" class="btn btn-default">Ajouter un billet</a>
+  	{{ form_row(form.save) }}
+  	{{ form_rest(form) }}
+  	{{ form_end(form) }}
+  		</div>
+  	</div>
+  </div>
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var $container = $('div#commande_billets');
+      var index = $container.find(':input').length;
+      $('#add_billet').click(function(e) {
+        addBillet($container);
+        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        return false;
+      });
+     
+      if (index == 0) {
+        addBillet($container);
+      } else {
+        $container.children('div').each(function() {
+          addDeleteLink($(this));
+        });
+      }
+
+      function addBillet($container) {
+        var template = $container.attr('data-prototype')
+          .replace(/__name__label__/g, 'Billet ')
+          .replace(/__name__/g,        )
+        ;
+
+        var $prototype = $(template);
+        addDeleteLink($prototype);
+        $container.append($prototype);
+        index++;
+      }
+      
+      function addDeleteLink($prototype) {
+        var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+        $prototype.append($deleteLink);
+        $deleteLink.click(function(e) {
+          $prototype.remove();
+          e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+          return false;
+        });
+      }
+    });
+
+  </script>
+  </div>
+  <script>
+  </script>
+</div>
+{% endblock %}

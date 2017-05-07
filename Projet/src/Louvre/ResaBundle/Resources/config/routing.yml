@@ -1,0 +1,24 @@
+louvre_resa_homepage:
+    path:     /a
+    defaults: { _controller: LouvreResaBundle:Reservation:index }
+
+louvre_prix_billet:
+    path:     /prix/{id}
+    defaults: { _controller: LouvreResaBundle:Reservation:prix }
+
+louvre_paiement_billet:
+    path:     /paiement 
+    defaults: { _controller: LouvreResaBundle:Reservation:paiement }
+
+louvre_stripe_billet:
+    path:     /stripe
+    defaults: { _controller: LouvreResaBundle:Reservation:stripe }
+
+louvre_paiement_reussi:
+    path:     /paiement-reussi
+    defaults: { _controller: LouvreResaBundle:Reservation:finalisation }
+
+louvre_paiement_echec:
+    path:     /echec-paiement
+    defaults: { _controller: LouvreResaBundle:Reservation:echec }
+
