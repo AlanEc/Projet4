@@ -44,6 +44,7 @@ class Billet
      * @var \DateTime
      *
      * @ORM\Column(name="DateNaissance", type="date")
+     * @Assert\DateTime()
      */
     private $dateNaissance;
 

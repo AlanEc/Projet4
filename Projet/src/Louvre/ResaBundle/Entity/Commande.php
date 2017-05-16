@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Louvre\ResaBundle\Validator\heureReservation;
+use Louvre\ResaBundle\Validator\nombreBilletVendu;
 
 /**
  * Commande
@@ -37,7 +39,8 @@ class Commande
      * @var \DateTime
      *
      * @ORM\Column(name="JourVisite", type="datetime")
-     * @Assert\DateTime()
+     * @nombreBilletVendu()
+     * @heureReservation()
      */
     private $jourVisite;
 
@@ -64,38 +67,14 @@ class Commande
      * @var \ string
      *
      * @ORM\Column(name="Email", type="string", nullable=false)
+     * @Assert\Email()
      */
     private $email;
-
-    private $heure;
 
     public function __construct() 
     {
         $this->date = new \Datetime();
         $this->billets   = new ArrayCollection();
-    }
-
-    public function heureReservation() 
-    {
-        /* Verification - Possibilité de reserver un billet journée */
-        $dateReservation = $this->getDate();
-        $dateCommandeEffectue = new \DateTime;
-
-        $dateFormat = $dateReservation->format('Y-m-d');
-        $date = \DateTime::createFromFormat('Y-m-d', $dateFormat);
-        $date = $date->format('Y-m-d');
-
-        $dateFormat1 = $dateCommandeEffectue->format('Y-m-d');
-        $date1 = \DateTime::createFromFormat('Y-m-d', $dateFormat1);
-        $date1 = $date1->format('Y-m-d');
-
-        if ($date == $date1) {
-            $dateFormat = $dateReservation->format('Y-m-d H:i:s');
-            $date = \DateTime::createFromFormat('Y-m-d H:i:s', $dateFormat);
-            $date = $date->format('H');
-
-            $this->heure = $date;
-        }
     }
 
     /**
@@ -106,6 +85,20 @@ class Commande
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @param int
+     *
+     * @return Commande
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -310,10 +303,5 @@ class Commande
     public function getEmail()
     {
         return $this->email;
-    }
-
-    public function getHeure()
-    {
-        return $this->heure;
     }
 }

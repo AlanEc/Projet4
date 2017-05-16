@@ -1,4 +1,16 @@
 services:
-#    louvre_resa.example:
-#        class: Louvre\ResaBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    louvre_resa.validator.nombreBilletVendu:
+        class: Louvre\ResaBundle\Validator\nombreBilletVenduValidator
+        arguments: ["@request_stack", "@doctrine.orm.entity_manager"] 
+        tags:
+            - { name: validator.constraint_validator, alias: Louvre_resa_nombreBilletVendu }
+    louvre_resa.calculPrix:
+        class: Louvre\ResaBundle\Services\calculPrix
+        arguments: ["@doctrine.orm.entity_manager"] 
+    louvre_resa.message:
+        class: Louvre\ResaBundle\Services\message
+        arguments: ["@mailer", "@twig"] 
+
+parameters:
+    api_stripe: sk_test_vzE0pO86RkJTKOb7usTz3Z4F
+

@@ -21,7 +21,6 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
         ->add('typeBillet', ChoiceType::class, array(
             'label' => 'Type de Billet',
             'choices' => array(
