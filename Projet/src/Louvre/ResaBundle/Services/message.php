@@ -20,27 +20,10 @@ class message
     $this->templating = $templating;
   }
 
-  public function constructionMessage()
+  public function constructionMessage($commande)
   {
 
-    $session = new Session();
-    $idCommande = $session->get('idCommande');
- 
-    $repository = $this
-    ->em->getRepository('LouvreResaBundle:Commande')
-    ;
-
-    $commande = $repository->findOneBy(
-    array('id' => $idCommande)
-    );
-
-    $repository = $this
-    ->em->getRepository('LouvreResaBundle:Billet')
-    ;
-
-    $billets = $repository->findBy(
-    array('commande' => $idCommande)
-    );
+    $billets = $commande->getBillets();
 
     $dateCommande = $commande->getDate();
     $formatDateCommande = $dateCommande->format('Y-m-d H:i:s');

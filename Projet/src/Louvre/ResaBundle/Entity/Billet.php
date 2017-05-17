@@ -49,7 +49,7 @@ class Billet
     private $dateNaissance;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Louvre\ResaBundle\Entity\Commande")
+     * @ORM\ManyToOne(targetEntity="Louvre\ResaBundle\Entity\Commande", inversedBy="billets")
      * @ORM\JoinColumn(nullable=false)
      */
     private $commande;

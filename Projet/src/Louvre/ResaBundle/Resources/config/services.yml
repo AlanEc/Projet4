@@ -9,7 +9,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager"] 
     louvre_resa.message:
         class: Louvre\ResaBundle\Services\message
-        arguments: ["@mailer", "@twig"] 
+        arguments: ["@mailer", "@templating"] 
 
 parameters:
     api_stripe: sk_test_vzE0pO86RkJTKOb7usTz3Z4F
