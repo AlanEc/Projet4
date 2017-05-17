@@ -16,20 +16,20 @@ class calculPrix
     $this->em = $em;
   }
 
-  public function calcul($id)
+  public function calcul($commande)
   {
-    $session = new Session();
+    // $session = new Session();
     
-    $repositoryBillet = $this->em
-    ->getRepository('LouvreResaBundle:Billet');
+    // $repositoryBillet = $this->em
+    // ->getRepository('LouvreResaBundle:Billet');
 
-    $listeBillets = $repositoryBillet->findBy(
-        array('commande' => $id)
-      );
+    // $listeBillets = $repositoryBillet->findBy(
+    //     array('commande' => $id)
+    //   );
     
      
       $prixTotal = 0;
-      foreach ($listeBillets as $billet) {
+      foreach ($commande->getBillets() as $billet) {
      
 
         if ($billet->getTarifReduit() == 1) {
