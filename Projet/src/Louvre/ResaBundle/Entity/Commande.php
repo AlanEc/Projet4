@@ -6,8 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Louvre\ResaBundle\Validator\heureReservation;
-use Louvre\ResaBundle\Validator\nombreBilletVendu;
+use Louvre\ResaBundle\Validator\HeureReservation;
+use Louvre\ResaBundle\Validator\NombreBilletVendu;
+use Louvre\ResaBundle\Validator\DateReservationImpossible;
 
 /**
  * Commande
@@ -39,8 +40,9 @@ class Commande
      * @var \DateTime
      *
      * @ORM\Column(name="JourVisite", type="datetime")
-     * @nombreBilletVendu()
-     * @heureReservation()
+     * @NombreBilletVendu()
+     * @HeureReservation()
+     * @DateReservationImpossible()
      */
     private $jourVisite;
 
