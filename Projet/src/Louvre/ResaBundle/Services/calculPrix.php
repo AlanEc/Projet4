@@ -6,28 +6,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Louvre\ResaBundle\Entity\Commande;
 use Louvre\ResaBundle\Entity\Billet;
 
-class calculPrix
+class CalculPrix
 {
-  private $em;
-
-
-  public function __construct(EntityManagerInterface $em)
-  {
-    $this->em = $em;
-  }
-
   public function calcul($commande)
-  {
-    // $session = new Session();
-    
-    // $repositoryBillet = $this->em
-    // ->getRepository('LouvreResaBundle:Billet');
-
-    // $listeBillets = $repositoryBillet->findBy(
-    //     array('commande' => $id)
-    //   );
-    
-     
+  {   
       $prixTotal = 0;
       foreach ($commande->getBillets() as $billet) {
      
@@ -61,7 +43,6 @@ class calculPrix
         }
 
         $billet->setPrix($prix);
-        $prix = $billet->getPrix();
         $prixTotal += $prix;
       } 
 

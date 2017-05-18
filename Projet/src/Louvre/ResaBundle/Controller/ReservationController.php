@@ -35,25 +35,25 @@ class ReservationController extends Controller
         $session = new Session();
         $session->set('typeBillet', $typeBillet);
         
-        var_dump($commande->getBillets());
-        $calculPrix = $this->container->get('louvre_resa.calculPrix');
+        // var_dump($commande->getBillets());
+        $calculPrix = $this->container->get('louvre_resa.CalculPrix');
         $prixTotal = $calculPrix->calcul($commande);
+
+        /*Permet de récupérer la commande dans le contrôleur finalisationAction */
         $commande->setPrixTotal($prixTotal);
         $session->set('commande', $commande);
         $em->persist($commande);
         $em->flush();
 
-        
-
         /*Permet de récupérer la date de la commande dans le contrôleur finalisationAction */
-        $session->set('idCommande', $commande->getId());
+        // $session->set('idCommande', $commande->getId());
      
         $prixStripe = $prixTotal * 100;
 
-        // return $this->redirectToRoute('louvre_prix_billet', array('id' => $commande->getId(),
-        //   'prixStripe' => $prixStripe,
-        //   'prixTotal' => $prixTotal
-        //   ));
+        return $this->redirectToRoute('louvre_prix_billet', array('id' => $commande->getId(),
+          'prixStripe' => $prixStripe,
+          'prixTotal' => $prixTotal
+          ));
       }}
 
     return $this->render('LouvreResaBundle:Reservation:index.html.twig', array(
@@ -61,53 +61,53 @@ class ReservationController extends Controller
     ));
     }
 
-  // public function prixAction($id, Request $request) {
+  public function prixAction($id, Request $request) {
 
-  //   $prixTotal = $request->query->get('prixTotal');
-  //   $prixStripe = $request->query->get('prixStripe');
+    $prixTotal = $request->query->get('prixTotal');
+    $prixStripe = $request->query->get('prixStripe');
 
-  //   return $this->render('LouvreResaBundle:Reservation:stripe.html.twig', array(
-  //   'prixTotal' => $prixTotal,
-  //   'prixStripe' => $prixStripe
-  //   ));
-  // }
+    return $this->render('LouvreResaBundle:Reservation:stripe.html.twig', array(
+    'prixTotal' => $prixTotal,
+    'prixStripe' => $prixStripe
+    ));
+  }
 
-  // public function paiementAction(Request $request) {
+  public function paiementAction(Request $request) {
 
-  //   return $this->render('LouvreResaBundle:Reservation:stripe.html.twig');
-  // }
+    return $this->render('LouvreResaBundle:Reservation:stripe.html.twig');
+  }
 
-  // public function stripeAction(Request $request) {
+  public function stripeAction(Request $request) {
 
-  //   \Stripe\Stripe::setApiKey($this->container->getParameter('api_stripe'));
-  //   $token = $_POST['stripeToken'];
+    \Stripe\Stripe::setApiKey($this->container->getParameter('api_stripe'));
+    $token = $_POST['stripeToken'];
 
-  //   try {
-  //     $charge = \Stripe\Charge::create(array(
-  //     "amount" => 1000,
-  //     "currency" => "eur",
-  //     "source" => $token,
-  //     "description" => "Paiement Stripe - OpenClassrooms Exemple"
-  //     ));
+    try {
+      $charge = \Stripe\Charge::create(array(
+      "amount" => 1000,
+      "currency" => "eur",
+      "source" => $token,
+      "description" => "Paiement Stripe - OpenClassrooms Exemple"
+      ));
 
-  //     $this->addFlash("success","Bravo ça marche !");
-  //     return $this->redirectToRoute("louvre_paiement_reussi");
+      $this->addFlash("success","Bravo ça marche !");
+      return $this->redirectToRoute("louvre_paiement_reussi");
 
-  //   } catch(\Stripe\Error\Card $e) {
-  //     $this->addFlash("error","Snif ça marche pas :(");
-  //     return $this->redirectToRoute("order_prepare");
-  //   }
-  // }
+    } catch(\Stripe\Error\Card $e) {
+      $this->addFlash("error","Snif ça marche pas :(");
+      return $this->redirectToRoute("order_prepare");
+    }
+  }
 
-  // public function finalisationAction(Request $request) {
+  public function finalisationAction(Request $request) {
 
-  //   $session = new Session();
-  //   $commande = $session->get('commande');
-  //   $message = $this->container->get('louvre_resa.message');
-  //   $message->constructionMessage($commande);
+    $session = new Session();
+    $commande = $session->get('commande');
+    $message = $this->container->get('louvre_resa.Message');
+    $message->constructionMessage($commande);
 
-  //   return $this->render('LouvreResaBundle:Reservation:paiement-reussi.html.twig');
-  // }
+    return $this->render('LouvreResaBundle:Reservation:paiement-reussi.html.twig');
+  }
 }
 
 

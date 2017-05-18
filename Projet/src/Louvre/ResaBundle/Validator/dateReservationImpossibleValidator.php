@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class dateReservationImpossibleValidator extends ConstraintValidator
+class DateReservationImpossibleValidator extends ConstraintValidator
 {
 	public function validate($value, Constraint $constraint)
 	{

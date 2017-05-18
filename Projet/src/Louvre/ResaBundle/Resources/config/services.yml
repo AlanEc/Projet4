@@ -1,14 +1,13 @@
 services:
-    louvre_resa.validator.nombreBilletVendu:
-        class: Louvre\ResaBundle\Validator\nombreBilletVenduValidator
+    louvre_resa.validator.NombreBilletVendu:
+        class: Louvre\ResaBundle\Validator\NombreBilletVenduValidator
         arguments: ["@request_stack", "@doctrine.orm.entity_manager"] 
         tags:
             - { name: validator.constraint_validator, alias: Louvre_resa_nombreBilletVendu }
-    louvre_resa.calculPrix:
-        class: Louvre\ResaBundle\Services\calculPrix
-        arguments: ["@doctrine.orm.entity_manager"] 
-    louvre_resa.message:
-        class: Louvre\ResaBundle\Services\message
+    louvre_resa.CalculPrix:
+        class: Louvre\ResaBundle\Services\CalculPrix
+    louvre_resa.Message:
+        class: Louvre\ResaBundle\Services\Message
         arguments: ["@mailer", "@templating"] 
 
 parameters:

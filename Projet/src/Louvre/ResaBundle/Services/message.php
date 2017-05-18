@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Louvre\ResaBundle\Entity\Commande;
 use Louvre\ResaBundle\Entity\Billet;
 
-class message
+class Message
 {
 
   private $mailer;

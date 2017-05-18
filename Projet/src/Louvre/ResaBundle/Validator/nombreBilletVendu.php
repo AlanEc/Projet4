@@ -5,7 +5,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class nombreBilletVendu extends Constraint
+class NombreBilletVendu extends Constraint
 {
 	public $message = "Le nombre maximum de billet a été atteint pour cette journée";
 

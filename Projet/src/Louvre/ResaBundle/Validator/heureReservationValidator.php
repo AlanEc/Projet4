@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class heureReservationValidator extends ConstraintValidator
+class HeureReservationValidator extends ConstraintValidator
 {
 	public function validate($value, Constraint $constraint)
 	{

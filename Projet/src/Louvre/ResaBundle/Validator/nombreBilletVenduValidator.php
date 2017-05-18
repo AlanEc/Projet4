@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class nombreBilletVenduValidator extends ConstraintValidator
+class NombreBilletVenduValidator extends ConstraintValidator
 {
 	private $requestStack;
 	private $em;
