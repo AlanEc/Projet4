@@ -10,12 +10,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class NombreBilletVenduValidator extends ConstraintValidator
 {
-	private $requestStack;
 	private $em;
 
-	public function __construct(RequestStack $requestStack, EntityManagerInterface $em)
+	public function __construct(EntityManagerInterface $em)
 	{
-		$this->requestStack = $requestStack;
 		$this->em           = $em;
 	}
 

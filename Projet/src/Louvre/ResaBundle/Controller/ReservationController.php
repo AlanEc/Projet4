@@ -96,10 +96,16 @@ class ReservationController extends Controller
     $session = new Session();
     $commande = $session->get('commande');
 
+    $repository = $this
+    ->getDoctrine()
+    ->getManager()
+    ->getRepository('LouvreResaBundle:Commande');
+    $commanderec = $repository->find($commande->getId());
+
     /*Modifier Etat Commande */
-    $commandePaye = $commande->setEtatCommande('Payé');
+    $commandePaye = $commanderec->setEtatCommande('Payé');
     $em = $this->getDoctrine()->getManager();
-    $em->persist($commande);
+    $em->persist($commandePaye);
     $em->flush();
 
     $message = $this->container->get('louvre_resa.Message');

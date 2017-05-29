@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EnityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,6 +28,9 @@ class CommandeType extends AbstractType
                'Billet Journée' => 'Billet journée',
                'Billet demi journée' => 'Billet demi journée' ))
         )
+        ->add('pays', CountryType::class, array(
+            'label' => 'Pays'
+        ))
         ->add('jourVisite', DateType::class, array(
             'label' => 'Jour de Visite',
             'widget' => 'single_text',

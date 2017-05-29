@@ -71,6 +71,11 @@ class Commande
      */
     private $etatCommande;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Pays", type="string", nullable=true)
+     */
     private $pays;
 
     /**
@@ -289,6 +294,30 @@ class Commande
     public function getPrixTotal()
     {
         return $this->prixTotal;
+    }
+
+    /**
+     * Set pays
+     *
+     * @param string $pays
+     *
+     * @return Commande
+     */
+    public function setPays($pays)
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get pays
+     *
+     * @return string
+     */
+    public function getPays()
+    {
+        return $this->pays;
     }
 
     /**
