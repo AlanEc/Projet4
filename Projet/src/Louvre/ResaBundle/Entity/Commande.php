@@ -60,10 +60,18 @@ class Commande
 
     /**
      * @var \ int
-     *
      * @ORM\Column(name="PrixTotal", type="integer", nullable=true)
      */
     private $prixTotal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="EtatCommande", type="string", nullable=true)
+     */
+    private $etatCommande;
+
+    private $pays;
 
     /**
      * @var \ string
@@ -176,34 +184,34 @@ class Commande
     }
 
     /**
-     * Set pays
+     * Set etatCommande
      *
-     * @param string $Pays
+     * @param string 
      *
      * @return Commande
      */
-    public function setPays($Pays)
+    public function setEtatCommande($etatCommande)
     {
-        $this->pays = $pays;
+        $this->etatCommande = $etatCommande;
 
         return $this;
     }
 
     /**
-     * Get pays
+     * Get etatCommande
      *
      * @return string
      */
-    public function getPays()
+    public function getEtatCommande()
     {
-        return $this->pays;
+        return $this->etatCommande;
     }
 
 
     /**
      * Set nombreBillet
      *
-     * @param integer $nombreBillet
+     * @param string $nombreBillet
      *
      * @return Commande
      */

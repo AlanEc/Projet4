@@ -9,6 +9,9 @@ services:
     louvre_resa.Message:
         class: Louvre\ResaBundle\Services\Message
         arguments: ["@mailer", "@templating"] 
+    louvre_resa.Stripe:
+        class: Louvre\ResaBundle\Services\Stripe
+        arguments: ["@router"] 
 
 parameters:
     api_stripe: sk_test_vzE0pO86RkJTKOb7usTz3Z4F

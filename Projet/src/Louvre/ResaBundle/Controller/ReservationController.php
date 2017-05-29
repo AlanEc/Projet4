@@ -79,30 +79,29 @@ class ReservationController extends Controller
 
   public function stripeAction(Request $request) {
 
+    $session = new Session();
+    $commande = $session->get('commande');
+    $prix = $commande->getPrixTotal();
+    $prixStripe = $prix * 100;
+
     \Stripe\Stripe::setApiKey($this->container->getParameter('api_stripe'));
     $token = $_POST['stripeToken'];
 
-    try {
-      $charge = \Stripe\Charge::create(array(
-      "amount" => 1000,
-      "currency" => "eur",
-      "source" => $token,
-      "description" => "Paiement Stripe - OpenClassrooms Exemple"
-      ));
-
-      $this->addFlash("success","Bravo ça marche !");
-      return $this->redirectToRoute("louvre_paiement_reussi");
-
-    } catch(\Stripe\Error\Card $e) {
-      $this->addFlash("error","Snif ça marche pas :(");
-      return $this->redirectToRoute("order_prepare");
-    }
+    $reglement = $this->container->get('louvre_resa.Stripe');
+    return $reglement->reglementCommande($prixStripe, $token);
   }
 
   public function finalisationAction(Request $request) {
 
     $session = new Session();
     $commande = $session->get('commande');
+
+    /*Modifier Etat Commande */
+    $commandePaye = $commande->setEtatCommande('Payé');
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($commande);
+    $em->flush();
+
     $message = $this->container->get('louvre_resa.Message');
     $message->constructionMessage($commande);
 
