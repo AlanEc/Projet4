@@ -47,7 +47,7 @@ class ReservationController extends Controller
 
         /*Permet de récupérer la date de la commande dans le contrôleur finalisationAction */
         // $session->set('idCommande', $commande->getId());
-     
+      
         $prixStripe = $prixTotal * 100;
 
         return $this->redirectToRoute('louvre_prix_billet', array('id' => $commande->getId(),
@@ -60,59 +60,6 @@ class ReservationController extends Controller
     'form' => $formBuilder->createView()
     ));
     }
-
-  public function prixAction($id, Request $request) {
-
-    $prixTotal = $request->query->get('prixTotal');
-    $prixStripe = $request->query->get('prixStripe');
-
-    return $this->render('LouvreResaBundle:Reservation:stripe.html.twig', array(
-    'prixTotal' => $prixTotal,
-    'prixStripe' => $prixStripe
-    ));
-  }
-
-  public function paiementAction(Request $request) {
-
-    return $this->render('LouvreResaBundle:Reservation:stripe.html.twig');
-  }
-
-  public function stripeAction(Request $request) {
-
-    $session = new Session();
-    $commande = $session->get('commande');
-    $prix = $commande->getPrixTotal();
-    $prixStripe = $prix * 100;
-
-    \Stripe\Stripe::setApiKey($this->container->getParameter('api_stripe'));
-    $token = $_POST['stripeToken'];
-
-    $reglement = $this->container->get('louvre_resa.Stripe');
-    return $reglement->reglementCommande($prixStripe, $token);
-  }
-
-  public function finalisationAction(Request $request) {
-
-    $session = new Session();
-    $commande = $session->get('commande');
-
-    $repository = $this
-    ->getDoctrine()
-    ->getManager()
-    ->getRepository('LouvreResaBundle:Commande');
-    $commanderec = $repository->find($commande->getId());
-
-    /*Modifier Etat Commande */
-    $commandePaye = $commanderec->setEtatCommande('Payé');
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($commandePaye);
-    $em->flush();
-
-    $message = $this->container->get('louvre_resa.Message');
-    $message->constructionMessage($commande);
-
-    return $this->render('LouvreResaBundle:Reservation:paiement-reussi.html.twig');
-  }
 }
 
 

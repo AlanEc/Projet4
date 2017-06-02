@@ -14,5 +14,5 @@ services:
         arguments: ["@router"] 
 
 parameters:
-    api_stripe: sk_test_vzE0pO86RkJTKOb7usTz3Z4F
+    # api_stripe: "%env(DB_PASSWORD)%"
 

@@ -4,28 +4,38 @@
 
 {% block body %}
   
-<h1></h1>
 <div id="conatainerAccueil">
   <div class="row">
-
-  		<div class="col-lg-offset-2 col-lg-3">
-  			<h3>Billetterie</h3>
-  			<div class="well">
-  	{{ form_start(form) }}
-  	{# Les erreurs générales du formulaire. #}
-  	{{ form_errors(form) }}
-  	{{ form_row(form.typeBillet) }}
-    {{ form_row(form.pays) }}
-  	{{ form_row(form.jourVisite) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.jourVisite) }}
-  	{{ form_row(form.billets) }}
-  	 <a href="#" id="add_billet" class="btn btn-default">Ajouter un billet</a>
-  	{{ form_row(form.save) }}
-  	{{ form_rest(form) }}
-  	{{ form_end(form) }}
-  		</div>
-  	</div>
+      <div class="col-lg-offset-2 col-lg-6">
+        <h3>Billetterie</h3>
+        <div class="well">
+        {{ form_start(form) }}
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+        <div class="row">
+          <div class="col-lg-6">
+            {{ form_row(form.typeBillet) }}
+          </div>
+          <div class="col-lg-6">
+            {{ form_row(form.pays) }}
+          </div>
+        </div>
+        {{ form_row(form.jourVisite) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.jourVisite) }}
+        {{ form_row(form.billets) }}
+        <div class="row">
+          <div class="col-lg-2">
+            <a href="#" id="add_billet" class="btn btn-default">Ajouter un billet</a>
+          </div>
+          <div class="col-lg-2 col-lg-push-8">
+            {{ form_row(form.save) }}
+          </div>
+        </div>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+      </div>
+    </div>
   </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
