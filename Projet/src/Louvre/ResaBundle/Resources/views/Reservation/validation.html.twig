@@ -1,63 +1,28 @@
-{% extends "LouvreResaBundle::layout.html.twig" %}
-
-{% block title %}{{ parent() }} - Index{% endblock %}
-
-{% block body %}
-	<div id="container">
-		<header>
-			<div id="imageLouvre">
-				<img src={{ url}}>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{{asset('bundles/css/style.css') }}">
+		<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+		<link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<div id="imageLouvre">
+					<img src={{ url}}>
+				</div>
+				<h1>Validation de votre commande</h1>
+			</header>
+			{% for billet in billets %}
+				<li>{{ billet.prenom }} {{billet.nom}}</li>
+			{% endfor %}
+			<div id="blocTexte">
+				<p> Commande réalisé le : {{ date }} </p>
+				<p>Prix total de votre commande : {{ Prix }} euros </p>
 			</div>
-			<h1>Validation de votre commande</h1>
-		</header>
-
-		{% for billet in billets %}
-			<li>{{ billet.prenom }} {{billet.nom}}</li>
-		{% endfor %}
-
-		<div id="blocTexte">
-			<p> Commande réalisé le : {{ date }} </p>
-			<p>Prix total de votre commande : {{ Prix }} euros </p>
 		</div>
-	</div>
-
-<style type="text/css">
-img {
-	margin-top: 10%;
-	margin-bottom: 10%;
-	width: 400px;
-}
-
-#container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	border: 1px solid black;
-	box-shadow: 8px 8px 12px #aaa;
-	width: 500px;
-	text-align: center;
-	border-color: #ddd;
-	border-radius: 4px;
-	margin: auto;
-}
-
-h1 {
-	color: #44A1B8;
-	font-size: 20px;
-}
-
-li {
-	margin: 0px;
-}
-
-#blocTexte {
-	margin-top: 50px;
-}
-
-p, li {
-	font-family: 'Helvetica', sans-serif;
-}
-
-
-</style>
-{% endblock %}
+	</body>
+</html>

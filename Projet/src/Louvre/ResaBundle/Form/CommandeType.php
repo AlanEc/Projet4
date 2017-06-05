@@ -36,14 +36,16 @@ class CommandeType extends AbstractType
             'widget' => 'single_text',
         ))
         ->add('billets', CollectionType::class, array(
-        'label' => 'Formulaire',
+        'label' => false,
         'entry_type'   => BilletType::class,
         'allow_add'    => true,
         'allow_delete' => true,
 
         ))
         ->add('email', TextType::class)
-        ->add('save', SubmitType::class);
+        ->add('save', SubmitType::class, array(
+            'label' => 'Envoyer',
+        ));
         
     }
     

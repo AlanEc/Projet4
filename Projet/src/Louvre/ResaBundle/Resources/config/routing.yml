@@ -22,3 +22,7 @@ louvre_paiement_echec:
     path:     /echec-paiement
     defaults: { _controller: LouvreResaBundle:Paiement:echec }
 
+louvre_page_apropos:
+    path:     /a-propos
+    defaults: { _controller: LouvreResaBundle:aPropos:vueApropos }
+
