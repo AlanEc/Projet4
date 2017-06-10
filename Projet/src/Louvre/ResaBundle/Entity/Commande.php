@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Louvre\ResaBundle\Validator\HeureReservation;
 use Louvre\ResaBundle\Validator\NombreBilletVendu;
 use Louvre\ResaBundle\Validator\DateReservationImpossible;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Commande
@@ -41,7 +42,6 @@ class Commande
      *
      * @ORM\Column(name="JourVisite", type="datetime")
      * @NombreBilletVendu()
-     * @HeureReservation()
      * @DateReservationImpossible()
      */
     private $jourVisite;
@@ -91,6 +91,29 @@ class Commande
         $this->date = new \Datetime();
         $this->billets   = new ArrayCollection();
     }
+
+    /**
+     * @Assert\Callback
+     */
+    public function isContentValid(ExecutionContextInterface $context)
+    {
+    if ($this->getTypeBillet() == 'Billet journée') {
+
+        $dateCommandeEffectue = new \DateTime;
+
+            if ($this->getJourVisite()->format('Y-m-d') == $dateCommandeEffectue->format('Y-m-d')) {
+
+                if ($dateCommandeEffectue->format('H') > 15) {
+                    $context
+                    ->buildViolation('Il est trop tard pour réserver un billet journée !') 
+                    ->atPath('content')                                                   
+                    ->addViolation() 
+                  ;
+                }
+            }
+        }
+    }
+
 
     /**
      * Get id
