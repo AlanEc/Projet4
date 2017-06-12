@@ -39,7 +39,7 @@ class PaiementController extends Controller
     $prixStripe = $prix * 100;
 
     \Stripe\Stripe::setApiKey($this->container->getParameter('API_KEY_STRIPE'));
-    $token = $_POST['stripeToken'];
+    $token = $request->get('stripeToken');
 
     $reglement = $this->container->get('louvre_resa.Stripe');
     return $reglement->reglementCommande($prixStripe, $token);
