@@ -25,7 +25,7 @@ class BilletType extends AbstractType
             ])
             ->add('tarifReduit', CheckboxType::class, array(
                 'required' => false,
-                'label' => 'Tarif réduit'))
+                'label' => 'Tarif réduit ( Sur présentation d\'un document justificatif pouvant votre status: étudiant, employé du musée, d’un service du Ministère de la Culture, militaire )'))
             ;
     }
     

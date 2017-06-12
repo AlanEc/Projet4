@@ -114,7 +114,6 @@ class Commande
         }
     }
 
-
     /**
      * Get id
      *

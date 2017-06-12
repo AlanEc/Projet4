@@ -39,11 +39,6 @@ class NombreBilletVenduValidator extends ConstraintValidator
       $totalNombreBillet += $nombreBillet;
     }
 
-    $jourVisite = $value;
-    $formatJourVisite = $jourVisite->format('Y-m-d H:i:s');
-    $date = \DateTime::createFromFormat('Y-m-d H:i:s', $formatJourVisite);
-    $date = $date->format('Y-m-d');
-
     if ($totalNombreBillet >= 1000) {
       $this->context->addViolation($constraint->message);
     }
